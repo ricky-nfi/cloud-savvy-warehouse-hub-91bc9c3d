@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { useToast } from '@/hooks/use-toast';
 import { Search, Plus, Filter, Package, Truck, CheckCircle, Clock } from 'lucide-react';
 
 const orderData = [
@@ -15,6 +16,21 @@ const orderData = [
 
 export const OrderManagement: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const { toast } = useToast();
+
+  const handleNewOrder = () => {
+    toast({
+      title: "New Order",
+      description: "New order creation dialog would open here.",
+    });
+  };
+
+  const handleViewOrder = (orderId: string) => {
+    toast({
+      title: "View Order",
+      description: `Order details for ${orderId} would be displayed here.`,
+    });
+  };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
@@ -38,7 +54,7 @@ export const OrderManagement: React.FC = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="text-3xl font-bold text-slate-800">Order Management</h2>
-        <Button>
+        <Button onClick={handleNewOrder}>
           <Plus className="h-4 w-4 mr-2" />
           New Order
         </Button>
@@ -93,7 +109,9 @@ export const OrderManagement: React.FC = () => {
                     </td>
                     <td className="py-4 px-4 text-slate-600">{order.date}</td>
                     <td className="py-4 px-4">
-                      <Button size="sm" variant="outline">View</Button>
+                      <Button size="sm" variant="outline" onClick={() => handleViewOrder(order.id)}>
+                        View
+                      </Button>
                     </td>
                   </tr>
                 ))}

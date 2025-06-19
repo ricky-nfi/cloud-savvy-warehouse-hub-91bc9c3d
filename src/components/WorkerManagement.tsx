@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { useToast } from '@/hooks/use-toast';
 import { Plus, User, Clock, CheckCircle } from 'lucide-react';
 
 const workerData = [
@@ -13,11 +14,27 @@ const workerData = [
 ];
 
 export const WorkerManagement: React.FC = () => {
+  const { toast } = useToast();
+
+  const handleAddWorker = () => {
+    toast({
+      title: "Add Worker",
+      description: "Add worker dialog would open here.",
+    });
+  };
+
+  const handleManageWorker = (workerId: string, workerName: string) => {
+    toast({
+      title: "Manage Worker",
+      description: `Management options for ${workerName} (${workerId}) would be displayed here.`,
+    });
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="text-3xl font-bold text-slate-800">Worker Management</h2>
-        <Button>
+        <Button onClick={handleAddWorker}>
           <Plus className="h-4 w-4 mr-2" />
           Add Worker
         </Button>
@@ -100,7 +117,13 @@ export const WorkerManagement: React.FC = () => {
                     <td className="py-4 px-4">{worker.tasksCompleted}</td>
                     <td className="py-4 px-4">{worker.hoursToday}h</td>
                     <td className="py-4 px-4">
-                      <Button size="sm" variant="outline">Manage</Button>
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        onClick={() => handleManageWorker(worker.id, worker.name)}
+                      >
+                        Manage
+                      </Button>
                     </td>
                   </tr>
                 ))}

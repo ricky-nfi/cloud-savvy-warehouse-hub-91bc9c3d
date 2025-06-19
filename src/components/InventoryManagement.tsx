@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { useToast } from '@/hooks/use-toast';
 import { 
   Search, 
   Plus, 
@@ -26,6 +27,35 @@ const inventoryData = [
 export const InventoryManagement: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
+  const { toast } = useToast();
+
+  const handleExport = () => {
+    toast({
+      title: "Export Started",
+      description: "Inventory data is being exported to CSV...",
+    });
+  };
+
+  const handleAddItem = () => {
+    toast({
+      title: "Add Item",
+      description: "Add item dialog would open here.",
+    });
+  };
+
+  const handleEdit = (itemId: string) => {
+    toast({
+      title: "Edit Item",
+      description: `Edit dialog for item ${itemId} would open here.`,
+    });
+  };
+
+  const handleAdjust = (itemId: string) => {
+    toast({
+      title: "Adjust Stock",
+      description: `Stock adjustment dialog for item ${itemId} would open here.`,
+    });
+  };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
@@ -65,11 +95,11 @@ export const InventoryManagement: React.FC = () => {
       <div className="flex items-center justify-between">
         <h2 className="text-3xl font-bold text-slate-800">Inventory Management</h2>
         <div className="flex space-x-3">
-          <Button variant="outline">
+          <Button variant="outline" onClick={handleExport}>
             <Download className="h-4 w-4 mr-2" />
             Export
           </Button>
-          <Button>
+          <Button onClick={handleAddItem}>
             <Plus className="h-4 w-4 mr-2" />
             Add Item
           </Button>
@@ -168,8 +198,12 @@ export const InventoryManagement: React.FC = () => {
                     <td className="py-4 px-4 font-medium text-slate-900">{item.value}</td>
                     <td className="py-4 px-4">
                       <div className="flex space-x-2">
-                        <Button size="sm" variant="outline">Edit</Button>
-                        <Button size="sm" variant="outline">Adjust</Button>
+                        <Button size="sm" variant="outline" onClick={() => handleEdit(item.id)}>
+                          Edit
+                        </Button>
+                        <Button size="sm" variant="outline" onClick={() => handleAdjust(item.id)}>
+                          Adjust
+                        </Button>
                       </div>
                     </td>
                   </tr>
