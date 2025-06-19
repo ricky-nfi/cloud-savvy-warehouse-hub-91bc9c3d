@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { 
@@ -11,6 +10,7 @@ import {
   DollarSign
 } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
+import { cn } from '@/lib/utils';
 
 const statsData = [
   { icon: Package, label: 'Total Items', value: '2,847', change: '+12%', trending: 'up' },
