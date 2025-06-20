@@ -5,6 +5,10 @@ import { Dashboard } from '@/components/Dashboard';
 import { InventoryManagement } from '@/components/InventoryManagement';
 import { OrderManagement } from '@/components/OrderManagement';
 import { WorkerManagement } from '@/components/WorkerManagement';
+import { WarehouseLayout } from '@/components/WarehouseLayout';
+import { Analytics } from '@/components/Analytics';
+import { MasterData } from '@/components/MasterData';
+import { Settings } from '@/components/Settings';
 
 const Index = () => {
   const [activeView, setActiveView] = useState('dashboard');
@@ -20,33 +24,13 @@ const Index = () => {
       case 'workers':
         return <WorkerManagement />;
       case 'layout':
-        return (
-          <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-slate-800">Warehouse Layout</h2>
-            <p className="text-slate-600 mt-4">Layout management coming soon...</p>
-          </div>
-        );
+        return <WarehouseLayout />;
       case 'analytics':
-        return (
-          <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-slate-800">Analytics</h2>
-            <p className="text-slate-600 mt-4">Advanced analytics coming soon...</p>
-          </div>
-        );
+        return <Analytics />;
       case 'master':
-        return (
-          <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-slate-800">Master Data</h2>
-            <p className="text-slate-600 mt-4">Master data management coming soon...</p>
-          </div>
-        );
+        return <MasterData />;
       case 'settings':
-        return (
-          <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-slate-800">Settings</h2>
-            <p className="text-slate-600 mt-4">System settings coming soon...</p>
-          </div>
-        );
+        return <Settings />;
       default:
         return <Dashboard />;
     }
